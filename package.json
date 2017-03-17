@@ -1,0 +1,41 @@
+{
+  "name": "auth0-bundler",
+  "version": "0.1.0",
+  "description": "Bundle rules, scripts and hooks to deploy them to Auth0.",
+  "main": "index.js",
+  "scripts": {
+    "test": "eslint . && npm run test:unit && npm run test:functional",
+    "test:unit": "ava 'test/unit/**/*.js'",
+    "test:functional": "ava 'test/functional/**/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/holidaycheck/auth0-bundler.git"
+  },
+  "keywords": [
+    "auth0",
+    "bundler",
+    "commonjs"
+  ],
+  "author": "Stefan Lau",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/holidaycheck/auth0-bundler/issues"
+  },
+  "homepage": "https://github.com/holidaycheck/auth0-bundler#readme",
+  "devDependencies": {
+    "ava": "0.18.2",
+    "eslint": "3.17.1",
+    "eslint-config-holidaycheck": "0.10.1",
+    "sinon": "2.0.0"
+  },
+  "dependencies": {
+    "babel-core": "6.24.0",
+    "babel-preset-es2015": "6.24.0",
+    "babel-template": "6.23.0",
+    "babel-types": "6.23.0",
+    "ramda": "0.23.0",
+    "rollup": "0.41.6",
+    "rollup-plugin-commonjs": "8.0.2"
+  }
+}
