@@ -1,7 +1,7 @@
 const ava = require('ava');
 const path = require('path');
 
-const { bundleRule } = require('../../lib/auth0Bundler');
+const { bundleRule, bundleScript } = require('../../lib/auth0Bundler');
 
 ava.test('it should build a rule that can be evaled (evil!)', (t) => {
     const rulePath = path.join(__dirname, 'fixtures/rule.js');
@@ -22,7 +22,7 @@ ava.test('it should build a rule that can be evaled (evil!)', (t) => {
 ava.test('it should build a script that can be evaled (evil!)', (t) => {
     const scriptPath = path.join(__dirname, 'fixtures/script.js');
 
-    return bundleRule({ value: 10 }, scriptPath).then((result) => {
+    return bundleScript({ value: 10 }, scriptPath).then((result) => {
         const scriptToTest = eval(`(${result})`); // eslint-disable-line no-eval
 
         scriptToTest(10, (error, numberPlusConfig) => {

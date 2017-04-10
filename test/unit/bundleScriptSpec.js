@@ -1,7 +1,7 @@
 const { test } = require('ava');
 const sinon = require('sinon');
 
-const bundleRule = require('../../lib/bundleRule');
+const bundleScript = require('../../lib/bundleScript');
 const buildDepdendencies = () => ({
     rollup: sinon.stub().resolves({ generate: sinon.stub().returns({ code: '' }) }),
     babelTransform: sinon.stub().returns({ code: '' }),
@@ -10,12 +10,12 @@ const buildDepdendencies = () => ({
     rollupCommonjs: sinon.stub()
 });
 
-test('bundleRule should call rollup correctly', (t) => {
+test('bundleScript should call rollup correctly', (t) => {
     const dependencies = buildDepdendencies();
 
     dependencies.rollupCommonjs.returns('rollupPlugin');
 
-    return bundleRule(dependencies, null, '/rule/path.js').then(() => {
+    return bundleScript(dependencies, null, '/rule/path.js').then(() => {
         t.true(dependencies.rollup.calledOnce);
         t.true(dependencies.rollup.calledWithMatch({
             entry: '/rule/path.js',
@@ -24,19 +24,19 @@ test('bundleRule should call rollup correctly', (t) => {
     });
 });
 
-test('bundleRule should generate the rollup bundle', (t) => {
+test('bundleScript should generate the rollup bundle', (t) => {
     const dependencies = buildDepdendencies();
     const bundle = { generate: sinon.stub().returns({ code: '' }) };
 
     dependencies.rollup.resolves(bundle);
 
-    return bundleRule(dependencies, null, '/rule/path.js').then(() => {
+    return bundleScript(dependencies, null, '/rule/path.js').then(() => {
         t.true(bundle.generate.calledOnce);
         t.true(bundle.generate.calledWith({ format: 'es' }));
     });
 });
 
-test('bundleRule should call babel with the correct preset and return the result', (t) => {
+test('bundleScript should call babel with the correct preset and return the result', (t) => {
     const dependencies = buildDepdendencies();
 
     const bundleResult = 'bundleCode';
@@ -49,7 +49,7 @@ test('bundleRule should call babel with the correct preset and return the result
     dependencies.babelTransform.withArgs(transpiledResult).returns({ code: expectedResult });
     dependencies.BabelPluginExportToFunction.returns({ internal: 'plugin' });
 
-    return bundleRule(dependencies, null, '/rule/path.js').then((result) => {
+    return bundleScript(dependencies, null, '/rule/path.js').then((result) => {
         t.true(dependencies.babelTransform.calledTwice);
         t.true(dependencies.babelTransform.calledWithMatch(bundleResult, {
             presets: [
@@ -63,12 +63,12 @@ test('bundleRule should call babel with the correct preset and return the result
     });
 });
 
-test('bundleRule should pass injecedOptions as ast to the export-to-function plugin', (t) => {
+test('bundleScript should pass injecedOptions as ast to the export-to-function plugin', (t) => {
     const dependencies = buildDepdendencies();
 
     dependencies.buildLiteralAst.withArgs('myoptions').returns('myobjectliteral');
 
-    return bundleRule(dependencies, 'myoptions', '/rule/path.js').then(() => {
+    return bundleScript(dependencies, 'myoptions', '/rule/path.js').then(() => {
         t.true(dependencies.BabelPluginExportToFunction.calledOnce);
         t.true(dependencies.BabelPluginExportToFunction.calledWith('myobjectliteral'));
     });
