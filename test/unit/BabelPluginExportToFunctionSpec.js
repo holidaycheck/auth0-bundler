@@ -2,7 +2,7 @@ const test = require('ava').test;
 const babel = require('babel-core');
 const babelTypes = require('babel-types');
 
-const { BabelPluginExportToFunction } = require('../../lib/BabelPluginExportToFunction');
+const BabelPluginExportToFunction = require('../../lib/BabelPluginExportToFunction');
 
 test('BabelPluginExportToFunction should wrap a function without arguments', (t) => {
     const exportToFunction = new BabelPluginExportToFunction(babelTypes.nullLiteral());
