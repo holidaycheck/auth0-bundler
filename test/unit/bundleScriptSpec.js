@@ -54,6 +54,14 @@ test('bundleScript should call babel with the correct preset and return the resu
         t.true(dependencies.babelTransform.calledWithMatch(bundleResult, {
             presets: [
                 [ 'es2015' ]
+            ],
+            plugins: [
+                [
+                    'transform-es2015-modules-commonjs',
+                    {
+                        strict: true
+                    }
+                ]
             ]
         }));
         t.true(dependencies.babelTransform.calledWithMatch(transpiledResult, {
