@@ -1,3 +1,5 @@
+'use strict';
+
 const ava = require('ava');
 const path = require('path');
 

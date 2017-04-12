@@ -1,3 +1,5 @@
+'use strict';
+
 const test = require('ava').test;
 const R = require('ramda');
 const babelTypes = require('babel-types');

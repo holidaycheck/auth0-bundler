@@ -1,3 +1,5 @@
+'use strict';
+
 const R = require('ramda');
 const { add, subtract } = require('./lib');
 
