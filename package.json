@@ -2,7 +2,12 @@
   "name": "auth0-bundler",
   "version": "0.1.0",
   "description": "Bundle rules, scripts and hooks to deploy them to Auth0.",
-  "main": "index.js",
+  "main": "lib/auth0Bundler.js",
+  "files": [
+    "lib/",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "test": "eslint . && npm run test:unit && npm run test:functional",
     "test:unit": "ava 'test/unit/**/*.js'",
