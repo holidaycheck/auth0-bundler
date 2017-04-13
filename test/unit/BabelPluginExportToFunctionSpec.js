@@ -1,3 +1,5 @@
+'use strict';
+
 const test = require('ava').test;
 const babel = require('babel-core');
 const babelTypes = require('babel-types');
