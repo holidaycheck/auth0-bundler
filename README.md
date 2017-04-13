@@ -1,5 +1,7 @@
 # auth0-bundler
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/holidaycheck/auth0-bundler.svg)](https://greenkeeper.io/)
+
 [![NPM version][npm-image]][npm-url]
 [![Build status][travis-ci-image]][travis-ci-url]
 [![License][license-image]][license-url]
