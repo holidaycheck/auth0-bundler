@@ -27,7 +27,7 @@ test('BabelPluginExportToFunction should wrap a function without arguments', (t)
     }).code, expected);
 });
 
-test('BabelPluginExportToFunction should wrap a function with multiple arguments', (t) => {
+test('BabelPluginExportToFunction should wrap a function expression with multiple arguments', (t) => {
     const exportToFunction = new BabelPluginExportToFunction(babelTypes.nullLiteral());
     const code = [
         'var rule = function myRule(config, myArg1, myArg2, callback) {}',
@@ -68,6 +68,30 @@ test('BabelPluginExportToFunction should wrap a function and assign it to module
         plugins: [ exportToFunction ]
     }).code, expected);
 });
+
+test('BabelPluginExportToFunction should wrap a function declaration', (t) => {
+    const exportToFunction = new BabelPluginExportToFunction(babelTypes.nullLiteral());
+    const code = [
+        'function myRule(config, arg1, callback) {}',
+        'var script = myRule;',
+        'exports.default = script;'
+    ].join('\n');
+    const expected = [
+        'function __bundlerWrapper(__bundlerArg1, __bundlerCallback) {',
+        '  \'use strict\';',
+        '',
+        '  var __bundlerConfig = null;',
+        '  function myRule(config, arg1, callback) {}',
+        '  var script = myRule;',
+        '  script(__bundlerConfig, __bundlerArg1, __bundlerCallback);',
+        '}'
+    ].join('\n');
+
+    t.is(babel.transform(code, {
+        plugins: [ exportToFunction ]
+    }).code, expected);
+});
+
 test('BabelPluginExportToFunction should inject config ast', (t) => {
     const exportToFunction = new BabelPluginExportToFunction(babelTypes.stringLiteral('testconfig'));
     const code = [
