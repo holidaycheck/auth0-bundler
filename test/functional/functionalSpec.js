@@ -2,6 +2,8 @@
 
 const ava = require('ava');
 const path = require('path');
+const sinon = require('sinon');
+const Promise = require('bluebird');
 
 const { bundleRule, bundleScript } = require('../../lib/auth0Bundler');
 
@@ -34,3 +36,19 @@ ava.test('it should build a script that can be evaled (evil!)', (t) => {
     });
 });
 
+ava.test('doesn’t log warnings to the console', (t) => {
+    /* eslint-disable no-console */
+    sinon.stub(console, 'error');
+
+    t.plan(1);
+
+    const rulePath = path.join(__dirname, 'fixtures/rule.js');
+
+    return Promise.resolve(bundleRule({}, rulePath))
+        .then(() => {
+            t.is(console.error.callCount, 0);
+        })
+        .finally(() => {
+            console.error.restore();
+        });
+});
