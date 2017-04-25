@@ -4,8 +4,10 @@ const ava = require('ava');
 const path = require('path');
 const sinon = require('sinon');
 const Promise = require('bluebird');
+const R = require('ramda');
+const { NodeVM } = require('vm2');
 
-const { bundleRule, bundleScript } = require('../../lib/auth0Bundler');
+const { bundleRule, bundleScript, bundleHook } = require('../../lib/auth0Bundler');
 
 ava.test('it should build a rule that can be evaled (evil!)', (t) => {
     const rulePath = path.join(__dirname, 'fixtures/rule.js');
@@ -50,5 +52,41 @@ ava.test('doesn’t log warnings to the console', (t) => {
         })
         .finally(() => {
             console.error.restore();
+        });
+});
+
+ava.test('bundles hooks correctly as a commonjs module', (t) => {
+    const hookPath = path.join(__dirname, 'fixtures/hook.js');
+
+    t.plan(4);
+
+    return bundleHook({ value: 20 }, hookPath)
+        .then((bundledHook) => {
+            const vm = new NodeVM({
+                console: 'inherit',
+                sandbox: {},
+                require: {
+                    external: true,
+                    root: './'
+                }
+            });
+
+            const exportedValue = vm.run(bundledHook, hookPath);
+
+            t.true(R.is(Function, exportedValue));
+
+            const user = { addConfigValueToMe: 30, addOneToMe: 41, subtract42FromMe: 0, foo: 'bar' };
+
+            exportedValue(user, {}, (error, resultingUser, resultingContext) => {
+                t.is(error, null);
+
+                t.deepEqual(resultingUser, {
+                    foo: 'bar',
+                    addConfigValueToMe: 50,
+                    addOneToMe: 42,
+                    subtract42FromMe: -42
+                });
+                t.deepEqual(resultingContext, {});
+            });
         });
 });

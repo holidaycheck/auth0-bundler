@@ -48,6 +48,26 @@ test('BabelPluginExportToFunction should wrap a function with multiple arguments
     }).code, expected);
 });
 
+test('BabelPluginExportToFunction should wrap a function and assign it to module.exports', (t) => {
+    const exportToFunction = new BabelPluginExportToFunction(babelTypes.nullLiteral(), { commonjs: true });
+    const code = [
+        'var rule = function myRule(config, callback) {}',
+        'exports.default = rule;'
+    ].join('\n');
+    const expected = [
+        'module.exports = function __bundlerWrapper(__bundlerCallback) {',
+        '  \'use strict\';',
+        '',
+        '  var __bundlerConfig = null;',
+        '  var rule = function myRule(config, callback) {};',
+        '  rule(__bundlerConfig, __bundlerCallback);',
+        '};'
+    ].join('\n');
+
+    t.is(babel.transform(code, {
+        plugins: [ exportToFunction ]
+    }).code, expected);
+});
 test('BabelPluginExportToFunction should inject config ast', (t) => {
     const exportToFunction = new BabelPluginExportToFunction(babelTypes.stringLiteral('testconfig'));
     const code = [
