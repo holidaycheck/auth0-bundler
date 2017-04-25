@@ -1,8 +1,8 @@
 # auth0-bundler
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/holidaycheck/auth0-bundler.svg)](https://greenkeeper.io/)
 [![NPM version][npm-image]][npm-url]
 [![Build status][travis-ci-image]][travis-ci-url]
+[![Greenkeeper badge](https://badges.greenkeeper.io/holidaycheck/auth0-bundler.svg)](https://greenkeeper.io/)
 [![License][license-image]][license-url]
 
 Bundle [rules](https://auth0.com/docs/rules), [scripts](https://auth0.com/docs/connections/database/mysql#3-provide-action-scripts) and [hooks](https://auth0.com/docs/hooks) to deploy them to Auth0.
@@ -10,7 +10,7 @@ Bundle [rules](https://auth0.com/docs/rules), [scripts](https://auth0.com/docs/c
 This allows you to
 - test rules, scripts and hooks dedicated to be deployed to Auth0, as they can be required in node as well.
 - import other modules by using `require` statements with relative file paths. This way common functionality can be shared between rules.
-- passing in configuration at bundling time which can be used in your rule when it is executed.
+- pass in configuration at bundling time which can be used in your rule when it is executed.
 
 ## API
 
