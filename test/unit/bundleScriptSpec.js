@@ -17,7 +17,7 @@ test('bundleScript should call rollup correctly', (t) => {
 
     dependencies.rollupCommonjs.returns('rollupPlugin');
 
-    return bundleScript(dependencies, null, '/rule/path.js').then(() => {
+    return bundleScript(dependencies, null, null, '/rule/path.js').then(() => {
         t.true(dependencies.rollup.calledOnce);
         t.true(dependencies.rollup.calledWithMatch({
             entry: '/rule/path.js',
@@ -32,7 +32,7 @@ test('bundleScript should generate the rollup bundle', (t) => {
 
     dependencies.rollup.resolves(bundle);
 
-    return bundleScript(dependencies, null, '/rule/path.js').then(() => {
+    return bundleScript(dependencies, null, null, '/rule/path.js').then(() => {
         t.true(bundle.generate.calledOnce);
         t.true(bundle.generate.calledWith({ format: 'es' }));
     });
@@ -51,7 +51,7 @@ test('bundleScript should call babel with the correct preset and return the resu
     dependencies.babelTransform.withArgs(transpiledResult).returns({ code: expectedResult });
     dependencies.BabelPluginExportToFunction.returns({ internal: 'plugin' });
 
-    return bundleScript(dependencies, null, '/rule/path.js').then((result) => {
+    return bundleScript(dependencies, null, null, '/rule/path.js').then((result) => {
         t.true(dependencies.babelTransform.calledTwice);
         t.true(dependencies.babelTransform.calledWithMatch(bundleResult, {
             presets: [
@@ -78,8 +78,8 @@ test('bundleScript should pass injecedOptions as ast to the export-to-function p
 
     dependencies.buildLiteralAst.withArgs('myoptions').returns('myobjectliteral');
 
-    return bundleScript(dependencies, 'myoptions', '/rule/path.js').then(() => {
+    return bundleScript(dependencies, { any: 'option' }, 'myoptions', '/rule/path.js').then(() => {
         t.true(dependencies.BabelPluginExportToFunction.calledOnce);
-        t.true(dependencies.BabelPluginExportToFunction.calledWith('myobjectliteral'));
+        t.true(dependencies.BabelPluginExportToFunction.calledWithExactly('myobjectliteral', { any: 'option' }));
     });
 });

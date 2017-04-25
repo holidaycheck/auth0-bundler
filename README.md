@@ -16,8 +16,9 @@ will be passed to your rule when it is executed.
 
 ## API
 
-### auth0Bundler.bundleScript(injectedConfig, ruleFilename) -> Promise\<bundledScript\>
+### auth0Bundler.bundleScript(injectedConfig, scriptFilename) -> Promise\<bundledScript\>
 ### auth0Bundler.bundleRule(injectedConfig, ruleFilename) -> Promise\<bundledRule\>
+### auth0Bundler.bundleHook(injectedConfig, hookFilename) -> Promise\<bundledHook\>
 
 Bundles scripts and/or rules to be deployed to Auth0. The rule needs to be written as a commonjs
 module that exports a single function which takes 4 parameters: The config that can be specified
