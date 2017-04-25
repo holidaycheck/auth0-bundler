@@ -6,7 +6,7 @@
 [![Build status][travis-ci-image]][travis-ci-url]
 [![License][license-image]][license-url]
 
-Bundle rules, scripts and hooks to deploy them to Auth0.
+Bundle [rules](https://auth0.com/docs/rules), [scripts](https://auth0.com/docs/connections/database/mysql#3-provide-action-scripts) and [hooks](https://auth0.com/docs/hooks) to deploy them to Auth0.
 
 This allows for better abstraction and testability as you can use standard commonjs module
 syntax in rules, scripts and hooks dedicated to be deployed to Auth0. When you bundle your
