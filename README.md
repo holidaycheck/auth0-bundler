@@ -10,6 +10,7 @@ Bundle [rules](https://auth0.com/docs/rules), [scripts](https://auth0.com/docs/c
 This allows you to
 - test rules, scripts and hooks dedicated to be deployed to Auth0, as they can be required in node as well.
 - import other modules by using `require` statements with relative file paths. This way common functionality can be shared between rules.
+- write your rules using the whole ES2015 feature set, as the rules will be transpiled at bundle time.
 - pass in configuration at bundling time which can be used in your rule when it is executed.
 
 ## API
