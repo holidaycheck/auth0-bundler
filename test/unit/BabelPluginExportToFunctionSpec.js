@@ -116,13 +116,17 @@ test('BabelPluginExportToFunction should inject config ast', (t) => {
 test('BabelPluginExportToFunction should throw on invalid export', (t) => {
     const exportToFunction = new BabelPluginExportToFunction(babelTypes.stringLiteral('testconfig'));
     const code = 'function myRule() { exports.default = function (test) {}; }';
-    t.throws(() => babel.transform(code, { plugins: [ exportToFunction ] }));
+    const error = t.throws(() => babel.transform(code, { plugins: [ exportToFunction ] }));
+
+    t.is(error.message, 'unknown: auth0-bundler is missing default export in module');
 });
 
 test('BabelPluginExportToFunction should throw on variable export', (t) => {
     const exportToFunction = new BabelPluginExportToFunction(babelTypes.stringLiteral('testconfig'));
-    const code = 'var a = "test"; exports.default = a; }';
-    t.throws(() => babel.transform(code, { plugins: [ exportToFunction ] }));
+    const code = 'const a = "test"; exports.default = a;';
+    const error = t.throws(() => babel.transform(code, { plugins: [ exportToFunction ] }));
+
+    t.is(error.message, 'unknown: auth0-bundler is missing default export in module');
 });
 
 test('BabelPluginExportToFunction should throw on not enough arguments', (t) => {
@@ -132,7 +136,9 @@ test('BabelPluginExportToFunction should throw on not enough arguments', (t) => 
         'exports.default = rule;'
     ].join('\n');
 
-    t.throws(() => babel.transform(code, { plugins: [ exportToFunction ] }));
+    const error = t.throws(() => babel.transform(code, { plugins: [ exportToFunction ] }));
+
+    t.is(error.message, 'unknown: auth0-bundler is missing default export in module');
 });
 
 test('BabelPluginExportToFunction should throw on a missing export', (t) => {
