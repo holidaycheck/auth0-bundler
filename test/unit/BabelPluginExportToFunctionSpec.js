@@ -119,6 +119,12 @@ test('BabelPluginExportToFunction should throw on invalid export', (t) => {
     t.throws(() => babel.transform(code, { plugins: [ exportToFunction ] }));
 });
 
+test('BabelPluginExportToFunction should throw on variable export', (t) => {
+    const exportToFunction = new BabelPluginExportToFunction(babelTypes.stringLiteral('testconfig'));
+    const code = 'var a = "test"; exports.default = a; }';
+    t.throws(() => babel.transform(code, { plugins: [ exportToFunction ] }));
+});
+
 test('BabelPluginExportToFunction should throw on not enough arguments', (t) => {
     const exportToFunction = new BabelPluginExportToFunction(babelTypes.nullLiteral());
     const code = [
