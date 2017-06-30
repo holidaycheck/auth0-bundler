@@ -31,7 +31,7 @@
   "devDependencies": {
     "ava": "0.19.1",
     "eslint": "4.1.1",
-    "eslint-config-holidaycheck": "0.11.0",
+    "eslint-config-holidaycheck": "0.12.0",
     "sinon": "2.3.6",
     "vm2": "3.4.6"
   },
