@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const bundle = require('../../lib/bundle');
 const buildDepdendencies = () => ({
-    rollup: sinon.stub().resolves({ generate: sinon.stub().returns({ code: '' }) }),
+    rollup: sinon.stub().resolves({ generate: sinon.stub().resolves({ code: '' }) }),
     babelTransform: sinon.stub().returns({ code: '' }),
     BabelPluginExportToFunction: sinon.stub(),
     buildLiteralAst: sinon.stub(),
@@ -28,7 +28,7 @@ test('bundle should call rollup correctly', (t) => {
 
 test('bundle should generate the rollup bundle', (t) => {
     const dependencies = buildDepdendencies();
-    const rollupBundle = { generate: sinon.stub().returns({ code: '' }) };
+    const rollupBundle = { generate: sinon.stub().resolves({ code: '' }) };
 
     dependencies.rollup.resolves(rollupBundle);
 
@@ -44,7 +44,7 @@ test('bundle should call babel with the correct preset and return the result', (
     const bundleResult = 'bundleCode';
     const transpiledResult = 'function transpiledResult() {}';
     const expectedResult = 'function endResult() {}';
-    const rollupBundle = { generate: sinon.stub().returns({ code: bundleResult }) };
+    const rollupBundle = { generate: sinon.stub().resolves({ code: bundleResult }) };
 
     dependencies.rollup.resolves(rollupBundle);
     dependencies.babelTransform.withArgs(bundleResult).returns({ code: transpiledResult });
