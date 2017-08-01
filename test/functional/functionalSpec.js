@@ -3,7 +3,7 @@
 const ava = require('ava');
 const path = require('path');
 const sinon = require('sinon');
-const Promise = require('bluebird');
+const Bluebird = require('bluebird');
 const R = require('ramda');
 const { NodeVM } = require('vm2');
 
@@ -46,7 +46,7 @@ ava.test('doesn’t log warnings to the console', (t) => {
 
     const rulePath = path.join(__dirname, 'fixtures/rule.js');
 
-    return Promise.resolve(bundleRule({}, rulePath))
+    return Bluebird.resolve(bundleRule({}, rulePath))
         .then(() => {
             t.is(console.error.callCount, 0);
         })
