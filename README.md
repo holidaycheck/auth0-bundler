@@ -81,11 +81,6 @@ auth0Bundler.bundleRule(config, `${__dirname}/my-rule.js`).then((bundledRule) =>
 });
 ```
 
-## Changelog
-
-There have not been any releases yet. See the [CHANGELOG.md](CHANGELOG.md) file for more info once a version
-was released.
-
 ## License
 
 This project is licensed under the MIT license. See the [LICENSE](LICENSE) file for more info.
