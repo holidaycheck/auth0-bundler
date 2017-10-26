@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/holidaycheck/auth0-bundler#readme",
   "devDependencies": {
-    "ava": "0.22.0",
+    "ava": "0.23.0",
     "eslint": "4.5.0",
     "eslint-config-holidaycheck": "0.12.1",
     "sinon": "4.0.1",
