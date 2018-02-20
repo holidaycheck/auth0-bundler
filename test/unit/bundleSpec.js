@@ -2,6 +2,7 @@
 
 const { test } = require('ava');
 const sinon = require('sinon');
+const es2015ModulesCommonJSBabelPlugin = require('babel-plugin-transform-es2015-modules-commonjs');
 
 const bundle = require('../../lib/bundle');
 const buildDepdendencies = () => ({
@@ -20,7 +21,7 @@ test('bundle should call rollup correctly', (t) => {
     return bundle(dependencies, null, null, '/file/path.js').then(() => {
         t.true(dependencies.rollup.calledOnce);
         t.true(dependencies.rollup.calledWithMatch({
-            entry: '/file/path.js',
+            input: '/file/path.js',
             plugins: [ 'rollupPlugin' ]
         }));
     });
@@ -59,7 +60,7 @@ test('bundle should call babel with the correct preset and return the result', (
             ],
             plugins: [
                 [
-                    'transform-es2015-modules-commonjs',
+                    es2015ModulesCommonJSBabelPlugin,
                     {
                         strict: true
                     }
