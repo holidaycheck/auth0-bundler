@@ -2,6 +2,7 @@
 
 const { test } = require('ava');
 const sinon = require('sinon');
+const babelPresetEs2015 = require('babel-preset-es2015');
 const es2015ModulesCommonJSBabelPlugin = require('babel-plugin-transform-es2015-modules-commonjs');
 
 const bundle = require('../../lib/bundle');
@@ -56,7 +57,7 @@ test('bundle should call babel with the correct preset and return the result', (
         t.true(dependencies.babelTransform.calledTwice);
         t.true(dependencies.babelTransform.calledWithMatch(bundleResult, {
             presets: [
-                [ 'es2015' ]
+                [ babelPresetEs2015 ]
             ],
             plugins: [
                 [

@@ -1,3 +1,7 @@
+## 1.0.2 (February 20, 2018)
+
+* Fix babel preset being loaded from cwd
+
 ## 1.0.1 (February 20, 2018)
 
 * Fix babel plugins being loaded from cwd
