@@ -21,7 +21,7 @@ test('bundle should call rollup correctly', (t) => {
     return bundle(dependencies, null, null, '/file/path.js').then(() => {
         t.true(dependencies.rollup.calledOnce);
         t.true(dependencies.rollup.calledWithMatch({
-            entry: '/file/path.js',
+            input: '/file/path.js',
             plugins: [ 'rollupPlugin' ]
         }));
     });
