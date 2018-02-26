@@ -33,7 +33,7 @@
     "eslint": "4.18.1",
     "eslint-config-holidaycheck": "0.12.1",
     "sinon": "4.4.2",
-    "vm2": "3.5.1"
+    "vm2": "3.5.2"
   },
   "dependencies": {
     "babel-core": "6.26.0",
