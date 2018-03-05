@@ -41,7 +41,7 @@
     "babel-template": "6.26.0",
     "babel-types": "6.26.0",
     "ramda": "0.25.0",
-    "rollup": "0.56.3",
+    "rollup": "0.56.4",
     "rollup-plugin-commonjs": "8.3.0"
   }
 }
