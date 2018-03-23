@@ -32,7 +32,7 @@
     "ava": "0.25.0",
     "eslint": "4.19.1",
     "eslint-config-holidaycheck": "0.12.1",
-    "sinon": "4.4.6",
+    "sinon": "4.4.7",
     "vm2": "3.5.2"
   },
   "dependencies": {
