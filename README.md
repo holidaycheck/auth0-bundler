@@ -15,9 +15,21 @@ This allows you to
 
 ## API
 
-### auth0Bundler.bundleScript(injectedConfig, scriptFilename) -> Promise\<bundledScript\>
-### auth0Bundler.bundleRule(injectedConfig, ruleFilename) -> Promise\<bundledRule\>
-### auth0Bundler.bundleHook(injectedConfig, hookFilename) -> Promise\<bundledHook\>
+### `createBundler`
+
+```
+const createBundler = require('auth0-bundler');
+
+const bundler = createBundler(options);
+```
+
+#### Options
+
+* `nodeVersion`: the node version that should be targeted (used for `@babel/preset-env`), the default is `4`
+
+### bundler.bundleScript(injectedConfig, scriptFilename) -> Promise\<bundledScript\>
+### bundler.bundleRule(injectedConfig, ruleFilename) -> Promise\<bundledRule\>
+### bundler.bundleHook(injectedConfig, hookFilename) -> Promise\<bundledHook\>
 
 Bundles a single script, rule or hook so it can be deployed to Auth0. The rule needs to be written as a commonjs
 module that exports a single function. This function takes an additional first parameter compared to being defined in Auth0: The `injectedConfig` that can be specified at bundle time. Modules required from the `node_modules` folder will not be bundled and will be required in the Auth0 environment as well. Auth0 provides a number of modules inside the Auth0 environment, to check whether a module can be required check [webtaskio-canirequire](https://tehsis.github.io/webtaskio-canirequire/).
@@ -45,10 +57,11 @@ module.exports = function myRule(config, user, context, callback) {
 Bundle dependencies:
 
 ```js
-const auth0Bundler = require('auth0-bundler');
+const createBundler = require('auth0-bundler');
+const bundler = createBundler();
 const config = { baseUrl: 'https://www.example.com' };
 
-auth0Bundler
+bundler
     .bundleRule(config, `${__dirname}/my-rule.js`)
     .then(console.log);
 ```
@@ -67,10 +80,11 @@ const management = new ManagementClient({
   token: '{YOUR_API_V2_TOKEN}',
   domain: '{YOUR_ACCOUNT}.auth0.com'
 });
-const auth0Bundler = require('auth0-bundler');
+const createBundler = require('auth0-bundler');
+const bundler = createBundler();
 const config = { baseUrl: 'https://www.example.com' };
 
-auth0Bundler.bundleRule(config, `${__dirname}/my-rule.js`).then((bundledRule) => {
+bundler.bundleRule(config, `${__dirname}/my-rule.js`).then((bundledRule) => {
     return management.createRule({
         enabled: true,
         name: 'my-rule',
