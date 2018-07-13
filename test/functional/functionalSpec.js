@@ -7,7 +7,9 @@ const Bluebird = require('bluebird');
 const R = require('ramda');
 const { NodeVM } = require('vm2');
 
-const { bundleRule, bundleScript, bundleHook } = require('../../lib/auth0Bundler');
+const createBundler = require('../../lib/auth0Bundler');
+
+const { bundleRule, bundleScript, bundleHook } = createBundler;
 
 test('builds a rule that can be evaled (evil!)', (t) => {
     const rulePath = path.join(__dirname, 'fixtures/rule.js');
@@ -89,4 +91,14 @@ test('bundles hooks correctly as a commonjs module', (t) => {
                 t.deepEqual(resultingContext, {});
             });
         });
+});
+
+test('creates a bundler with specified node version which doesn’t transpile supported language features', (t) => {
+    const scriptPath = path.join(__dirname, 'fixtures/scriptAsyncAwait.js');
+    const bundler = createBundler({ nodeVersion: 8 });
+
+    return bundler.bundleScript({}, scriptPath).then((result) => {
+        t.true(result.includes('async function'));
+        t.true(result.includes('await'));
+    });
 });
