@@ -71,6 +71,27 @@ test('BabelPluginExportToFunction should wrap a function and assign it to module
     }).code, expected);
 });
 
+test('BabelPluginExportToFunction should use `const` instead of `var` when nodeVersion >= 8', (t) => {
+    const exportToFunction = new BabelPluginExportToFunction(babelTypes.nullLiteral(), { nodeVersion: 8 });
+    const code = [
+        'const rule = function myRule(config, myArg1, myArg2, callback) {}',
+        'exports.default = rule;'
+    ].join('\n');
+    const expected = [
+        'function __bundlerWrapper(__bundlerArg1, __bundlerArg2, __bundlerCallback) {',
+        '  \'use strict\';',
+        '',
+        '  const __bundlerConfig = null;',
+        '  const rule = function myRule(config, myArg1, myArg2, callback) {};',
+        '  rule(__bundlerConfig, __bundlerArg1, __bundlerArg2, __bundlerCallback);',
+        '}'
+    ].join('\n');
+
+    t.is(babel.transform(code, {
+        plugins: [ exportToFunction ]
+    }).code, expected);
+});
+
 test('BabelPluginExportToFunction should wrap a function declaration', (t) => {
     const exportToFunction = new BabelPluginExportToFunction(babelTypes.nullLiteral());
     const code = [
