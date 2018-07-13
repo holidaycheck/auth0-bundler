@@ -1,9 +1,13 @@
 {
-  "extends": "holidaycheck/es2015",
-  "parserOptions": {
-    "sourceType": "script"
-  },
-  "env": {
-    "node": true
-  }
+    "extends": "holidaycheck/es2015",
+    "plugins": [ "node" ],
+    "parserOptions": {
+        "sourceType": "script"
+    },
+    "env": {
+        "node": true
+    },
+    "rules": {
+        "node/no-unsupported-features": "error"
+    }
 }
