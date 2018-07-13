@@ -1,6 +1,6 @@
 'use strict';
 
-const ava = require('ava');
+const test = require('ava');
 const path = require('path');
 const sinon = require('sinon');
 const Bluebird = require('bluebird');
@@ -9,7 +9,7 @@ const { NodeVM } = require('vm2');
 
 const { bundleRule, bundleScript, bundleHook } = require('../../lib/auth0Bundler');
 
-ava.test('it should build a rule that can be evaled (evil!)', (t) => {
+test('builds a rule that can be evaled (evil!)', (t) => {
     const rulePath = path.join(__dirname, 'fixtures/rule.js');
 
     return bundleRule({ value: 10 }, rulePath).then((result) => {
@@ -25,7 +25,7 @@ ava.test('it should build a rule that can be evaled (evil!)', (t) => {
     });
 });
 
-ava.test('it should build a script that can be evaled (evil!)', (t) => {
+test('builds a script that can be evaled (evil!)', (t) => {
     const scriptPath = path.join(__dirname, 'fixtures/script.js');
 
     return bundleScript({ value: 10 }, scriptPath).then((result) => {
@@ -38,7 +38,7 @@ ava.test('it should build a script that can be evaled (evil!)', (t) => {
     });
 });
 
-ava.test('doesn’t log warnings to the console', (t) => {
+test('doesn’t log warnings to the console', (t) => {
     /* eslint-disable no-console */
     sinon.stub(console, 'error');
 
@@ -55,7 +55,7 @@ ava.test('doesn’t log warnings to the console', (t) => {
         });
 });
 
-ava.test('bundles hooks correctly as a commonjs module', (t) => {
+test('bundles hooks correctly as a commonjs module', (t) => {
     const hookPath = path.join(__dirname, 'fixtures/hook.js');
 
     t.plan(4);
