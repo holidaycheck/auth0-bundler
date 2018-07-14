@@ -36,7 +36,7 @@
     "vm2": "3.6.0"
   },
   "dependencies": {
-    "babel-core": "6.26.0",
+    "babel-core": "6.26.3",
     "babel-preset-es2015": "6.24.1",
     "babel-template": "6.26.0",
     "babel-types": "6.26.0",
