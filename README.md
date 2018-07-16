@@ -2,7 +2,6 @@
 
 [![NPM version][npm-image]][npm-url]
 [![Build status][travis-ci-image]][travis-ci-url]
-[![Greenkeeper badge](https://badges.greenkeeper.io/holidaycheck/auth0-bundler.svg)](https://greenkeeper.io/)
 [![License][license-image]][license-url]
 
 Bundle [rules](https://auth0.com/docs/rules), [scripts](https://auth0.com/docs/connections/database/mysql#3-provide-action-scripts) and [hooks](https://auth0.com/docs/hooks) to deploy them to Auth0.
