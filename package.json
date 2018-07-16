@@ -2,6 +2,9 @@
   "name": "auth0-bundler",
   "version": "1.0.2",
   "description": "Bundle rules, scripts and hooks to deploy them to Auth0.",
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "main": "lib/auth0Bundler.js",
   "files": [
     "lib/",
@@ -32,6 +35,7 @@
     "ava": "0.25.0",
     "eslint": "4.19.1",
     "eslint-config-holidaycheck": "0.13.1",
+    "eslint-plugin-node": "6.0.1",
     "sinon": "5.1.1",
     "vm2": "3.6.0"
   },
