@@ -1,15 +1,17 @@
 'use strict';
 
-const ava = require('ava');
+const test = require('ava');
 const path = require('path');
 const sinon = require('sinon');
 const Bluebird = require('bluebird');
 const R = require('ramda');
 const { NodeVM } = require('vm2');
 
-const { bundleRule, bundleScript, bundleHook } = require('../../lib/auth0Bundler');
+const createBundler = require('../../lib/auth0Bundler');
 
-ava.test('it should build a rule that can be evaled (evil!)', (t) => {
+const { bundleRule, bundleScript, bundleHook } = createBundler;
+
+test('builds a rule that can be evaled (evil!)', (t) => {
     const rulePath = path.join(__dirname, 'fixtures/rule.js');
 
     return bundleRule({ value: 10 }, rulePath).then((result) => {
@@ -25,7 +27,7 @@ ava.test('it should build a rule that can be evaled (evil!)', (t) => {
     });
 });
 
-ava.test('it should build a script that can be evaled (evil!)', (t) => {
+test('builds a script that can be evaled (evil!)', (t) => {
     const scriptPath = path.join(__dirname, 'fixtures/script.js');
 
     return bundleScript({ value: 10 }, scriptPath).then((result) => {
@@ -38,7 +40,7 @@ ava.test('it should build a script that can be evaled (evil!)', (t) => {
     });
 });
 
-ava.test('doesn’t log warnings to the console', (t) => {
+test('doesn’t log warnings to the console', (t) => {
     /* eslint-disable no-console */
     sinon.stub(console, 'error');
 
@@ -55,7 +57,7 @@ ava.test('doesn’t log warnings to the console', (t) => {
         });
 });
 
-ava.test('bundles hooks correctly as a commonjs module', (t) => {
+test('bundles hooks correctly as a commonjs module', (t) => {
     const hookPath = path.join(__dirname, 'fixtures/hook.js');
 
     t.plan(4);
@@ -89,4 +91,14 @@ ava.test('bundles hooks correctly as a commonjs module', (t) => {
                 t.deepEqual(resultingContext, {});
             });
         });
+});
+
+test('creates a bundler with specified node version which doesn’t transpile supported language features', (t) => {
+    const scriptPath = path.join(__dirname, 'fixtures/scriptAsyncAwait.js');
+    const bundler = createBundler({ nodeVersion: 8 });
+
+    return bundler.bundleScript({}, scriptPath).then((result) => {
+        t.true(result.includes('async function'));
+        t.true(result.includes('await'));
+    });
 });

@@ -19,7 +19,7 @@ test('bundle should call rollup correctly', (t) => {
 
     dependencies.rollupCommonjs.returns('rollupPlugin');
 
-    return bundle(dependencies, null, null, '/file/path.js').then(() => {
+    return bundle(dependencies, {}, null, '/file/path.js').then(() => {
         t.true(dependencies.rollup.calledOnce);
         t.true(dependencies.rollup.calledWithMatch({
             input: '/file/path.js',
@@ -34,7 +34,7 @@ test('bundle should generate the rollup bundle', (t) => {
 
     dependencies.rollup.resolves(rollupBundle);
 
-    return bundle(dependencies, null, null, '/file/path.js').then(() => {
+    return bundle(dependencies, {}, null, '/file/path.js').then(() => {
         t.true(rollupBundle.generate.calledOnce);
         t.true(rollupBundle.generate.calledWith({ format: 'es' }));
     });
@@ -53,13 +53,13 @@ test('bundle should call babel with the correct preset and return the result', (
     dependencies.babelTransform.withArgs(transpiledResult).returns({ code: expectedResult });
     dependencies.BabelPluginExportToFunction.returns({ internal: 'plugin' });
 
-    return bundle(dependencies, null, null, '/file/path.js').then((result) => {
+    return bundle(dependencies, { nodeVersion: 42 }, null, '/file/path.js').then((result) => {
         t.true(dependencies.babelTransform.calledTwice);
         t.true(dependencies.babelTransform.calledWithMatch(bundleResult, {
             presets: [
                 [ babelPresetEnv, {
                     targets: {
-                        node: 4
+                        node: 42
                     }
                 } ]
             ],
