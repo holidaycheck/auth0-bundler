@@ -1,6 +1,6 @@
 {
   "name": "auth0-bundler",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Bundle rules, scripts and hooks to deploy them to Auth0.",
   "engines": {
     "node": ">=6.0.0"
