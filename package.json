@@ -40,10 +40,10 @@
     "vm2": "3.6.3"
   },
   "dependencies": {
-    "@babel/core": "7.0.0-rc.2",
-    "@babel/preset-env": "7.0.0-rc.2",
-    "@babel/template": "7.0.0-rc.2",
-    "@babel/types": "7.0.0-rc.2",
+    "@babel/core": "7.0.0",
+    "@babel/preset-env": "7.0.0",
+    "@babel/template": "7.0.0",
+    "@babel/types": "7.0.0",
     "ramda": "0.25.0",
     "rollup": "0.64.1",
     "rollup-plugin-commonjs": "9.1.3"
