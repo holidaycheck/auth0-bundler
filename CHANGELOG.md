@@ -1,3 +1,9 @@
+## 1.1.2 (August 29, 2018)
+
+### Bug Fixes
+
+* Fix babel v7 support
+
 ## 1.1.1 (August 29, 2018)
 
 ### Changes
