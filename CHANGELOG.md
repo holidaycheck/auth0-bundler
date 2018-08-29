@@ -1,3 +1,9 @@
+## 1.1.1 (August 29, 2018)
+
+### Changes
+
+* Updated dependencies, including the stable release of babel v7
+
 ## 1.1.0 (July 17, 2018)
 
 ### Features
