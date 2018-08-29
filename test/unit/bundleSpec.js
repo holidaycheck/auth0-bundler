@@ -3,7 +3,7 @@
 const { test } = require('ava');
 const sinon = require('sinon');
 const babelPresetEnv = require('@babel/preset-env');
-const es2015ModulesCommonJSBabelPlugin = require('babel-plugin-transform-es2015-modules-commonjs');
+const es2015ModulesCommonJSBabelPlugin = require('@babel/plugin-transform-modules-commonjs');
 
 const bundle = require('../../lib/bundle');
 const buildDepdendencies = () => ({
