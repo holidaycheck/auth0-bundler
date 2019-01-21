@@ -33,7 +33,7 @@
   "homepage": "https://github.com/holidaycheck/auth0-bundler#readme",
   "devDependencies": {
     "ava": "1.1.0",
-    "eslint": "5.4.0",
+    "eslint": "5.12.1",
     "eslint-config-holidaycheck": "0.13.1",
     "eslint-plugin-node": "8.0.1",
     "sinon": "7.1.1",
