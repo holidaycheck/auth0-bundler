@@ -1,3 +1,9 @@
+## 1.2.0 (January 21, 2019)
+
+### Chore
+
+* Dependency updates - most noticeable: update to rollup v1
+
 ## 1.1.2 (August 29, 2018)
 
 ### Bug Fixes
