@@ -1,12 +1,12 @@
 'use strict';
 
-const test = require('ava').test;
-const babel = require('babel-core');
-const babelTypes = require('babel-types');
+const test = require('ava');
+const babel = require('@babel/core');
+const babelTypes = require('@babel/types');
 
 const BabelPluginExportToFunction = require('../../lib/BabelPluginExportToFunction');
 const expectedErrorMessage =
-    'unknown: auth0-bundler could not resolve a function with at least 2 parameters as default export.';
+    'auth0-bundler could not resolve a function with at least 2 parameters as default export.';
 
 test('BabelPluginExportToFunction should wrap a function without any additional parameters', (t) => {
     const exportToFunction = new BabelPluginExportToFunction(babelTypes.nullLiteral());
@@ -19,7 +19,9 @@ test('BabelPluginExportToFunction should wrap a function without any additional 
         '  \'use strict\';',
         '',
         '  var __bundlerConfig = null;',
+        '',
         '  var rule = function myRule(config, callback) {};',
+        '',
         '  rule(__bundlerConfig, __bundlerCallback);',
         '}'
     ].join('\n');
@@ -40,7 +42,9 @@ test('BabelPluginExportToFunction should wrap a function expression with additit
         '  \'use strict\';',
         '',
         '  var __bundlerConfig = null;',
+        '',
         '  var rule = function myRule(config, myArg1, myArg2, callback) {};',
+        '',
         '  rule(__bundlerConfig, __bundlerArg1, __bundlerArg2, __bundlerCallback);',
         '}'
     ].join('\n');
@@ -61,7 +65,9 @@ test('BabelPluginExportToFunction should wrap a function and assign it to module
         '  \'use strict\';',
         '',
         '  var __bundlerConfig = null;',
+        '',
         '  var rule = function myRule(config, callback) {};',
+        '',
         '  rule(__bundlerConfig, __bundlerCallback);',
         '};'
     ].join('\n');
@@ -82,7 +88,9 @@ test('BabelPluginExportToFunction should use `const` instead of `var` when nodeV
         '  \'use strict\';',
         '',
         '  const __bundlerConfig = null;',
+        '',
         '  const rule = function myRule(config, myArg1, myArg2, callback) {};',
+        '',
         '  rule(__bundlerConfig, __bundlerArg1, __bundlerArg2, __bundlerCallback);',
         '}'
     ].join('\n');
@@ -104,7 +112,9 @@ test('BabelPluginExportToFunction should wrap a function declaration', (t) => {
         '  \'use strict\';',
         '',
         '  var __bundlerConfig = null;',
+        '',
         '  function myRule(config, arg1, callback) {}',
+        '',
         '  var script = myRule;',
         '  script(__bundlerConfig, __bundlerArg1, __bundlerCallback);',
         '}'
@@ -126,7 +136,9 @@ test('BabelPluginExportToFunction should inject config ast', (t) => {
         '  \'use strict\';',
         '',
         '  var __bundlerConfig = "testconfig";',
+        '',
         '  var rule = function myRule(config, callback) {};',
+        '',
         '  rule(__bundlerConfig, __bundlerCallback);',
         '}'
     ].join('\n');

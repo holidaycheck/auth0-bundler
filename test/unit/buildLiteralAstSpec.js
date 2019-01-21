@@ -1,8 +1,8 @@
 'use strict';
 
-const test = require('ava').test;
+const test = require('ava');
 const R = require('ramda');
-const babelTypes = require('babel-types');
+const babelTypes = require('@babel/types');
 
 const buildLiteralAst = require('../../lib/buildLiteralAst');
 
