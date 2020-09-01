@@ -1,3 +1,9 @@
+## 1.3.0 (September 1, 2020)
+
+### Changes
+
+* Change supported versions of Node to 8, 12
+
 ## 1.2.0 (January 21, 2019)
 
 ### Chore
