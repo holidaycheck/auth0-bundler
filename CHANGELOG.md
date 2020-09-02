@@ -1,3 +1,9 @@
+## 1.3.1 (September 2, 2020)
+
+### Bug fix
+
+* Fix default version of node passed `createBundle` function
+
 ## 1.3.0 (September 1, 2020)
 
 ### Changes
