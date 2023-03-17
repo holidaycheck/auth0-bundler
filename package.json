@@ -40,11 +40,11 @@
     "vm2": "3.6.6"
   },
   "dependencies": {
-    "@babel/core": "7.4.5",
-    "@babel/plugin-transform-modules-commonjs": "7.4.4",
-    "@babel/preset-env": "7.4.5",
-    "@babel/template": "7.4.4",
-    "@babel/types": "7.4.4",
+    "@babel/core": "7.21.3",
+    "@babel/plugin-transform-modules-commonjs": "7.21.2",
+    "@babel/preset-env": "7.20.2",
+    "@babel/template": "7.20.7",
+    "@babel/types": "7.21.3",
     "ramda": "0.26.1",
     "rollup": "1.1.2",
     "rollup-plugin-commonjs": "9.2.0"
