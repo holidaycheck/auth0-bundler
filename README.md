@@ -1,5 +1,7 @@
 # auth0-bundler
 
+The project was not updated for two years and does not even support Node 16, which is required by Auth0 now. We decided to archive this project to make it clear, that no updates for this library can be expected any more.
+
 [![NPM version][npm-image]][npm-url]
 [![Build status][travis-ci-image]][travis-ci-url]
 [![License][license-image]][license-url]
